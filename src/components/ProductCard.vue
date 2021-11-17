@@ -7,7 +7,7 @@
     <v-card-subtitle>{{ price }} ₽</v-card-subtitle>
 
     <v-card-actions class="btn-wrapper">
-      <v-btn :color="color.pink" text> Купить </v-btn>
+      <v-btn :color="color.pink" text @click="addToBasket"> Купить </v-btn>
       <v-btn :color="color.blue" text @click="goToBasket">
         Перейти в корзину
       </v-btn>
@@ -50,6 +50,12 @@ export default {
   methods: {
     goToBasket() {
       this.$router.push('basket');
+    },
+    addToBasket() {
+      this.$store.commit('addToBasket', {
+        title: this.title,
+        price: this.price,
+      });
     },
   },
 };

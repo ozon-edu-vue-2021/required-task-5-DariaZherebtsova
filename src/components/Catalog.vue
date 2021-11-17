@@ -14,7 +14,6 @@
 import ProductCard from '@/components/ProductCard.vue';
 import selectImage from '@/utils/selectImage';
 import randomInteger from '@/utils/random';
-// import { mapActions } from 'vuex';
 
 export default {
   name: 'Catalog',
@@ -23,9 +22,11 @@ export default {
     ProductCard,
   },
 
-  data: () => ({
-    // products: [],
-  }),
+  created() {
+    if (!this.products.length) {
+      this.$store.dispatch('getProducts');
+    }
+  },
 
   computed: {
     products() {
@@ -44,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .catalog {
   display: flex;
   flex-wrap: wrap;
