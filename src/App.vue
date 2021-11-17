@@ -1,23 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <Catalog />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Catalog from '@/components/Catalog.vue';
-
 export default {
   name: 'App',
 
-  components: {
-    Catalog,
+  created() {
+    console.log('---getProducts');
+    this.$store.dispatch('getProducts');
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>

@@ -4,7 +4,7 @@
       v-for="product of products"
       :key="product.id"
       :title="product.dish"
-      :price="100"
+      :price="getPrice()"
       :imageName="getImageName()"
     />
   </div>
@@ -12,8 +12,9 @@
 
 <script>
 import ProductCard from '@/components/ProductCard.vue';
-import productsApi from '@/api/poducts-api';
 import selectImage from '@/utils/selectImage';
+import randomInteger from '@/utils/random';
+// import { mapActions } from 'vuex';
 
 export default {
   name: 'Catalog',
@@ -23,17 +24,21 @@ export default {
   },
 
   data: () => ({
-    products: [],
+    // products: [],
   }),
 
-  mounted() {
-    console.log('---Catalog mounted');
-    productsApi.getProducts().then((response) => (this.products = response));
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
   },
 
   methods: {
     getImageName() {
       return selectImage();
+    },
+    getPrice() {
+      return randomInteger(100, 400);
     },
   },
 };
