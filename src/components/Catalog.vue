@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog">
+  <div>
     <div v-if="isProductsLoading" class="catalog-loading">
       <v-progress-circular
         indeterminate
@@ -8,7 +8,7 @@
         :width="7"
       ></v-progress-circular>
     </div>
-    <template v-else>
+    <div class="catalog" v-else>
       <ProductCard
         v-for="product of products"
         :key="product.id"
@@ -16,7 +16,7 @@
         :price="getPrice()"
         :imageName="getImageName()"
       />
-    </template>
+    </div>
   </div>
 </template>
 

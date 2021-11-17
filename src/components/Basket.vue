@@ -9,7 +9,10 @@
       hide-default-footer
     >
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        <div class="btn-wrapper">
+          <Counter v-model="item.number" />
+          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        </div>
       </template>
       <template v-slot:footer>
         <div class="basket-total">
@@ -18,7 +21,7 @@
         </div>
       </template>
     </v-data-table>
-    <v-card-actions class="btn-wrapper">
+    <v-card-actions>
       <v-btn
         :color="color.pink"
         text
@@ -35,10 +38,15 @@
 </template>
 
 <script>
+import Counter from '@/components/Counter.vue';
 import { COLOR } from '@/shared/const';
 
 export default {
-  name: 'Catalog',
+  name: 'Basket',
+
+  components: {
+    Counter,
+  },
 
   data: () => ({
     headers: [
@@ -83,5 +91,9 @@ export default {
   border-top: 1px solid #bdbdbd;
   display: flex;
   gap: 10px;
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

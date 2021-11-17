@@ -13,7 +13,7 @@ export default new Vuex.Store({
   getters: {
     getTotalPrice: (state) => {
       return state.basketProducts.reduce((accumulator, item) => {
-        return accumulator + item.price;
+        return accumulator + item.price * item.number;
       }, 0);
     },
   },

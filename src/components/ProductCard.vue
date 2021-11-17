@@ -5,7 +5,7 @@
     <v-card-title>{{ title }}</v-card-title>
 
     <v-card-subtitle>{{ price }} ₽</v-card-subtitle>
-
+    <Counter v-model="number" />
     <v-card-actions class="btn-wrapper">
       <v-btn :color="color.pink" text @click="addToBasket"> Купить </v-btn>
       <v-btn :color="color.blue" text @click="goToBasket">
@@ -16,10 +16,15 @@
 </template>
 
 <script>
+import Counter from '@/components/Counter.vue';
 import { COLOR } from '@/shared/const';
 
 export default {
-  name: 'Catalog',
+  name: 'ProductCard',
+
+  components: {
+    Counter,
+  },
 
   props: {
     title: {
@@ -37,7 +42,7 @@ export default {
   },
 
   data: () => ({
-    products: [],
+    number: 1,
     color: COLOR,
   }),
 
@@ -49,6 +54,7 @@ export default {
       this.$store.commit('addToBasket', {
         title: this.title,
         price: this.price,
+        number: this.number,
       });
     },
   },
@@ -59,6 +65,11 @@ export default {
 .product-card {
   margin-bottom: 10px;
   max-width: 344px;
+}
+.product-counter {
+  width: 100px;
+  display: flex;
+  align-items: center;
 }
 .btn-wrapper {
   display: flex;
