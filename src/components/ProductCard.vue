@@ -32,7 +32,7 @@ export default {
     },
     imageName: {
       type: String,
-      default: '6148226736',
+      default: 'mock',
     },
   },
 
@@ -40,12 +40,6 @@ export default {
     products: [],
     color: COLOR,
   }),
-
-  mounted() {
-    // console.log('---imageName', `@/assets/images/${this.imageName}.webp`);
-  },
-
-  computed: {},
 
   methods: {
     goToBasket() {

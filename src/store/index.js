@@ -7,22 +7,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: [],
-    basketProducts: [
-      { title: 'French Fries with Sausages', price: 100 },
-      { title: 'Vjkjrj', price: 100 },
-    ],
+    basketProducts: [],
+    isProductsLoading: false,
   },
   getters: {
     getTotalPrice: (state) => {
-      let result = state.basketProducts.reduce((accumulator, item) => {
+      return state.basketProducts.reduce((accumulator, item) => {
         return accumulator + item.price;
       }, 0);
-      return result;
     },
   },
   mutations: {
-    setProducts: (state, payload) => {
-      state.products = payload;
+    setProducts: (state, products) => {
+      state.products = products;
+    },
+    setProductsLoading: (state, value) => {
+      state.isProductsLoading = value;
     },
     addToBasket: (state, product) => {
       state.basketProducts = [...state.basketProducts, product];
@@ -42,9 +42,11 @@ export default new Vuex.Store({
   },
   actions: {
     getProducts: (context) => {
-      productsApi
-        .getProducts()
-        .then((response) => context.commit('setProducts', response));
+      context.commit('setProductsLoading', true);
+      productsApi.getProducts().then((response) => {
+        context.commit('setProducts', response);
+        context.commit('setProductsLoading', false);
+      });
     },
   },
 });

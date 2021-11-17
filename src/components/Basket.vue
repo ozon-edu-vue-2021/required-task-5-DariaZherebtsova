@@ -19,7 +19,14 @@
       </template>
     </v-data-table>
     <v-card-actions class="btn-wrapper">
-      <v-btn :color="color.pink" text @click="makeOrder"> Оформить </v-btn>
+      <v-btn
+        :color="color.pink"
+        text
+        @click="makeOrder"
+        :disabled="!basketProducts.length"
+      >
+        Оформить
+      </v-btn>
       <v-btn :color="color.blue" text @click="goToCatalog">
         Вернуться в каталог
       </v-btn>
@@ -34,7 +41,6 @@ export default {
   name: 'Catalog',
 
   data: () => ({
-    search: '',
     headers: [
       { text: 'Название', value: 'title' },
       { text: 'Цена', value: 'price' },

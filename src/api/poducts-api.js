@@ -1,16 +1,17 @@
-import axios from 'axios';
+import Vue from 'vue';
+import { products } from '@/api/index';
 
 const productsApi = {
   async getProducts() {
-    console.log('---getProducts');
     try {
-      const res = await axios.get(
-        'https://random-data-api.com/api/food/random_food?size=30'
-      );
-      console.log('--getProducts res', res.data);
+      const res = await products.get('/random_food?size=30');
       return res.data;
     } catch (err) {
-      console.error(err);
+      Vue.notify({
+        group: 'catalog',
+        type: 'error',
+        text: 'Проблемы с загрузкой товаров',
+      });
     }
   },
 };

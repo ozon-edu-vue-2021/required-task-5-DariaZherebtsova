@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <notifications group="catalog" />
     <v-main>
       <router-view />
     </v-main>
