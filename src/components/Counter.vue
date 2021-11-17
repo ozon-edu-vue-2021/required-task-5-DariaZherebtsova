@@ -4,7 +4,6 @@
       <v-icon :color="color.blue"> mdi-plus </v-icon>
     </v-btn>
     <div>{{ value }}</div>
-    <!-- <v-text-field :value="number" readonly></v-text-field> -->
     <v-btn icon @click="decreaseNumber">
       <v-icon :color="color.pink"> mdi-minus </v-icon>
     </v-btn>
