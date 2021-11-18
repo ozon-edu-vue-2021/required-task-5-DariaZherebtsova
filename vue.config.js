@@ -1,14 +1,22 @@
 module.exports = {
-    chainWebpack: (config) => {
-        const svgRule = config.module.rule('svg');
+  transpileDependencies: ['vuetify'],
 
-        svgRule.uses.clear();
+  chainWebpack: (config) => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap((options) => {
+        options.transformAssetUrls = {
+          'v-img': 'src',
+        };
 
-        svgRule
-            .use('babel-loader')
-            .loader('babel-loader')
-            .end()
-            .use('vue-svg-loader')
-            .loader('vue-svg-loader');
-    },
+        return options;
+      });
+    config.plugin('VuetifyLoaderPlugin').tap(() => [
+      {
+        progressiveImages: true,
+      },
+    ]);
+  },
 };
